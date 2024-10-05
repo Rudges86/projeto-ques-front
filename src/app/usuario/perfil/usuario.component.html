@@ -1,0 +1,72 @@
+<h1>Editar Perfil</h1>
+
+<form  #perfilForm="ngForm">
+    <div>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" [(ngModel)]="perfilUser.nome" name="nome" required [disabled]="!isEditing">
+    </div>
+
+    <div>
+      <label for="imagem">Imagem de Perfil:</label>
+      <div (click)="fileInput.click()" style="cursor: pointer;">
+          <img *ngIf="imagemPreview" [src]="imagemPreview" alt="Imagem de perfil" style="width: 100px; height: 100px; border-radius: 50%;">
+          <span *ngIf="!imagemPreview">Clique aqui para adicionar imagem</span>
+      </div>
+      <input type="file" id="imagem" (change)="onFileChange($event)" #fileInput hidden accept="image/*">
+  </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="perfilUser.email" name="email" disabled>
+    </div>
+
+    <div>
+        <label for="status">Status:</label>
+        <input type="text" id="status" [(ngModel)]="perfilUser.status" name="status" disabled>
+    </div>
+
+    <div>
+        <label for="role">Role:</label>
+        <input type="text" id="role" [(ngModel)]="perfilUser.role" name="role" disabled>
+    </div>
+
+    <button type="button" (click)="enableEditing()">Editar</button>
+    <button type="submit" [disabled]="!isEditing">Salvar</button>
+</form>
+
+<p *ngIf="mensagem">{{ mensagem }}</p>
+
+
+
+<!-- <div *ngIf="perfilUser" class="bodyPerfil">
+  <h1>Bem-vindo</h1>
+  <img class="imagemPerfil" *ngIf="perfilUser.imagemPerfil"  [src]="perfilUser.imagemPerfil" alt="">
+
+  <div class="edit">
+    <input type="text" [value]="perfilUser.nome" disabled>
+    <input type="text" [value]="perfilUser.email" disabled>
+    <input type="text" [value]="perfilUser.role" disabled>
+    <input type="text" [value]="perfilUser.status" disabled>
+  </div>
+
+    <button (click)="habilitarEdicao()">editar</button>
+    <button>salvar</button>
+</div> -->
+
+<div *ngIf="loading">
+    carregando.....
+</div>
+
+<!-- <div *ngIf="perfil$ | async as perfilUser">
+  <h1>Bem-vindo</h1>
+  <p>{{perfilUser.nome}}</p>
+  <p>email: {{perfilUser.email}}</p>
+  <p>perfil: {{perfilUser.role}}</p>
+  <p>status: {{perfilUser.status}}</p>
+</div>
+
+<div *ngIf="!(perfil$|async)">
+
+    carregando....
+
+</div> -->

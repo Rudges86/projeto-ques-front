@@ -1,0 +1,83 @@
+.body {
+  background-color: #3a6299;
+}
+
+
+.formCadastroLogin {
+  font-size: 16px;
+  color: white;
+  display: flex;
+  flex-direction: column ;
+
+  h1 {
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  form>div {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+  }
+
+  .groupSenha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  input {
+    width: 100%;
+    height: 25px;
+    margin: 2px 0;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  label {
+    margin:10px 0;
+    text-align: left;
+  }
+
+  button {
+    width: 5%;
+    min-width: 100px;
+    padding: 0.5em;
+    font-weight: bold;
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+}
+
+
+span {
+  font-size: 14px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-weight: bolder;
+}
+
+.input{
+  width: 50%;
+}
+

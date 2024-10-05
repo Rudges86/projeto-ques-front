@@ -1,0 +1,29 @@
+<div class="body">
+  <div class="formCadastroLogin">
+    <div>
+      <h1>Login</h1>
+    </div>
+    <form [formGroup]="login" (ngSubmit)="logar()">
+      <div>
+        <label for="Nome">Email:</label>
+        <div class="input">
+          <input type="email" placeholder="fulanoMaria@gmail.com" formControlName="email">
+        </div>
+      </div>
+
+      <div>
+        <label for="">password:</label>
+        <div class="input">
+          <input type="password" placeholder="*********" formControlName="password">
+        </div>
+      </div>
+      <div>
+        <button type="submit">Login</button>
+      </div>
+    </form>
+    <div>
+      <span>Não possui um login? <a routerLink="/cadastrar">Cadastre-se.</a></span>
+    </div>
+  </div>
+</div>
+<button (click)="mostrar()">mostrarToken</button>

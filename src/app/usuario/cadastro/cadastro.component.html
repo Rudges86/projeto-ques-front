@@ -1,0 +1,41 @@
+<div class="body">
+  <div class="formCadastroLogin">
+    <form [formGroup]="cadastrarFormulario" (ngSubmit)="cadastrar()">
+      <div>
+        <h1>Cadastro</h1>
+      </div>
+      <div>
+        <div class="label">
+          <label for="Nome">Nome Completo:</label>
+        </div>
+        <input type="text" placeholder="Fulano Maria" formControlName="nome">
+        <mat-error *ngIf="cadastrarFormulario.controls['nome'].errors?.['required']
+        &&
+        (cadastrarFormulario.controls['nome'].touched || cadastrarFormulario.controls['nome'].dirty)">
+          Insira seu nome completo
+        </mat-error>
+      </div>
+
+      <div>
+        <div class="label">
+          <label for="">Endereço de E-mail:</label>
+        </div>
+        <input type="email" placeholder="fulano@gmail.com" formControlName="email">
+      </div>
+      <div formGroupName="senha" class="groupSenha">
+        <div class="label">
+          <label for="">Senha:</label>
+        </div>
+        <input type="password" placeholder="***********" formControlName="password">
+        <div class="label">
+          <label>Confirme a senha:</label>
+        </div>
+        <input type="password" placeholder="***********" formControlName="confirmaSenha">
+      </div>
+      <div class="groupLink">
+        <button type="submit " [disabled]="!cadastrarFormulario.valid" [ngClass]="{'btn-disativado':!cadastrarFormulario.valid, 'btn-ativo':cadastrarFormulario.valid}">Cadastrar</button>
+        <span>Já possui conta? <a routerLink="/login">Clique para fazer login.</a></span>
+      </div>
+    </form>
+  </div>
+</div>
