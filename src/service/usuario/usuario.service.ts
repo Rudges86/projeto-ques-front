@@ -21,8 +21,8 @@ export class UsuarioService {
   }
 
   perfil():Observable<PerfilUsuario> {
-    const token = sessionStorage.getItem("token");
-    const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+    //const token = sessionStorage.getItem("token");
+    const headers:HttpHeaders = this.montaToken();
 
     return this.http.get<PerfilUsuario>(`${this.baseUrl}perfil`, {headers: headers});
   }
@@ -31,5 +31,25 @@ export class UsuarioService {
     return this.http.post<{token:string}>(`${this.baseUrl}login`,user).pipe(
       map(response => response.token)
     );
+  }
+
+  editarPerfil(perfil:PerfilUsuario, imagem?:File):Observable<ResponseMensage> {
+    debugger
+    const formData = new FormData();
+    if(imagem){
+      formData.append('imagem',imagem);
+    }
+    formData.append('nome',perfil.nome);
+    formData.append('email',perfil.email);
+    const headers:HttpHeaders = this.montaToken();
+    return this.http.patch<ResponseMensage>(`${this.baseUrl}editarPerfil`,formData,{headers: headers})
+  }
+
+
+
+  private montaToken():HttpHeaders {
+    const token = sessionStorage.getItem("token");
+    const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+    return headers;
   }
 }

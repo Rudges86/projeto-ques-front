@@ -1,14 +1,100 @@
-.bodyPerfil{
-  border: 1px solid red;
-  width: 99%;
-  height: 99%;
-  margin:0 auto;
-  .imagemPerfil{
-    position: relative;
-    left: 90%;
-    border-radius: 60px;
-    height: 150px;
-    width: 150px;
+.bodyPerfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  .titulo {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+
+}
+
+.imagemPerfil {
+  border-radius: 80px;
+  min-width: 100px;
+  min-height: 100px;
+  max-height: 200px;
+  max-width: 200px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.input mat-form-field + mat-form-field {
+  margin-left: 10px;
+
+}
+
+.divIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  img {
+    min-width: 100px;
+    min-height: 100px;
+    max-height: 200px;
+    max-width: 200px;
+  }
+
+  span {
+    font-size: 12px;
   }
 }
 
+.disabled{
+  cursor: default;
+}
+.enabled{
+  cursor:pointer;
+}
+
+.form {
+  min-width: 150px;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.spinner {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+
+}
+
+
+
+.div-btn {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 300px;
+  margin-top: 25px;
+
+  button {
+    background-color: rgb(15, 112, 176);
+    width: 100px;
+    border-radius: 10px;
+    padding: 5px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    background-color: #d6d6d6;
+    color: #a1a1a1;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
