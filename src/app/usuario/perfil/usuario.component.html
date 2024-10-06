@@ -1,40 +1,89 @@
-<h1>Editar Perfil</h1>
+<mat-card appearance="outlined" class="bodyPerfil" *ngIf="perfilUser">
+  <mat-card-header>
+    <mat-card-title class="titulo">{{titulo}} </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="form" [formGroup]="perfilForm" (ngSubmit)="salvar()">
+      <div class="imagemPerfil">
+        <div (click)="fileInput.click()" [ngClass]="{'disabled':!isEditing, 'enabled':isEditing}">
+          <img *ngIf="perfilUser.imagemPerfil" [src]="perfilUser.imagemPerfil" alt="Imagem de perfil" class="imagemPerfil">
+          <div *ngIf="!perfilUser.imagemPerfil" class="divIcon">
+            <img src="../../../assets/user.png" alt="icone de usuário">
+            <span *ngIf="isEditing">Clique aqui para adicionar imagem</span>
+          </div>
+        </div>
+        <input type="file" id="imagemFile" (change)="onFileChange($event)" #fileInput hidden accept="image/*" [disabled]="!isEditing">
+      </div>
 
-<form  #perfilForm="ngForm">
-    <div>
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" [(ngModel)]="perfilUser.nome" name="nome" required [disabled]="!isEditing">
-    </div>
+      <div class="input">
+        <mat-form-field appearance="fill">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="nome" required>
+        </mat-form-field>
 
+        <mat-form-field appearance="fill">
+          <mat-label>email</mat-label>
+          <input matInput formControlName="email" required>
+        </mat-form-field>
+      </div>
+
+      <div class="input">
+        <mat-form-field appearance="fill">
+          <mat-label>Status</mat-label>
+          <input matInput [value]="perfilUser.status" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Perfil</mat-label>
+          <input matInput [value]="perfilUser.role" disabled>
+        </mat-form-field>
+      </div>
+      <div class="div-btn">
+        <button type="button" (click)="habilitarEdicao()">Editar</button>
+        <button [disabled]="!isEditing" type="submit">Salvar</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<!-- <div class="bodyPerfil">
+  <h1>Editar Perfil</h1>
+
+  <form #perfilForm="ngForm" class="form">
     <div>
-      <label for="imagem">Imagem de Perfil:</label>
       <div (click)="fileInput.click()" style="cursor: pointer;">
-          <img *ngIf="imagemPreview" [src]="imagemPreview" alt="Imagem de perfil" style="width: 100px; height: 100px; border-radius: 50%;">
-          <span *ngIf="!imagemPreview">Clique aqui para adicionar imagem</span>
+        <img *ngIf="imagemPreview" [src]="imagemPreview" alt="Imagem de perfil" class="imagemPerfil">
+        <span *ngIf="!imagemPreview">Clique aqui para adicionar imagem</span>
       </div>
       <input type="file" id="imagem" (change)="onFileChange($event)" #fileInput hidden accept="image/*">
-  </div>
-
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" [(ngModel)]="perfilUser.email" name="email" disabled>
     </div>
 
-    <div>
-        <label for="status">Status:</label>
-        <input type="text" id="status" [(ngModel)]="perfilUser.status" name="status" disabled>
+    <div class="campos">
+      <div class="input">
+        <label for="nome" >Nome:</label>
+        <input type="text"  id="nome" [(ngModel)]="perfilUser.nome" name="nome" required [disabled]="!isEditing">
+      </div>
+
+      <div class="input">
+        <label for="email" >Email:</label>
+        <input type="email"  id="email" [(ngModel)]="perfilUser.email" name="email" disabled>
+      </div>
+
+      <div style="border: 1px solid red">
+        <p>Status: {{perfilUser.status}}</p>
+        <p>Role: {{perfilUser.role}}</p>
+      </div>
     </div>
 
-    <div>
-        <label for="role">Role:</label>
-        <input type="text" id="role" [(ngModel)]="perfilUser.role" name="role" disabled>
-    </div>
+
 
     <button type="button" (click)="enableEditing()">Editar</button>
     <button type="submit" [disabled]="!isEditing">Salvar</button>
-</form>
+  </form>
 
-<p *ngIf="mensagem">{{ mensagem }}</p>
+  <p *ngIf="mensagem">{{ mensagem }}</p>
+
+</div> -->
 
 
 
@@ -53,8 +102,8 @@
     <button>salvar</button>
 </div> -->
 
-<div *ngIf="loading">
-    carregando.....
+<div *ngIf="loading" class="spinner">
+  <mat-spinner mode="indeterminate"></mat-spinner>
 </div>
 
 <!-- <div *ngIf="perfil$ | async as perfilUser">

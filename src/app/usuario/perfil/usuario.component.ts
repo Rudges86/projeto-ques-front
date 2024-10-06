@@ -1,6 +1,7 @@
-
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { ResponseMensage } from 'src/model/responseMensage';
 import { PerfilUsuario } from 'src/model/usuario/PerfilUsuario';
 import { SnackService } from 'src/service/snack/snack.service';
 import { UsuarioService } from 'src/service/usuario/usuario.service';
@@ -10,18 +11,23 @@ import { UsuarioService } from 'src/service/usuario/usuario.service';
   templateUrl: './usuario.component.html',
   styleUrls: ['./usuario.component.scss']
 })
-export class UsuarioComponent implements OnInit{
-  perfil$ !:Observable<PerfilUsuario>;
+export class UsuarioComponent implements OnInit {
+  perfil$ !: Observable<PerfilUsuario>;
   perfilUser!: PerfilUsuario;
-  loading:boolean = true;
+  loading: boolean = true;
+  titulo: string = "Perfil";
 
   imagem: File | null = null;
   imagemPreview: string | null = null;
   isEditing = false;
-  mensagem: string | null = null;
+  //Montar o reactive depois
+  perfilForm: FormGroup = this.fb.group({
+    nome: [{ value: '', disabled: true }, [Validators.required]],
+    email: [{ value: '', disabled: true }, [Validators.required, Validators.email]]
+  });
 
-  constructor(private usuario: UsuarioService, private snackService: SnackService,) {}
 
+  constructor(private fb: FormBuilder, private usuario: UsuarioService, private snackService: SnackService,) { }
 
 
   ngOnInit(): void {
@@ -29,19 +35,19 @@ export class UsuarioComponent implements OnInit{
   }
 
 
-  carregarPerfil():void{
+  carregarPerfil(): void {
     // this.perfil$ = this.usuario.perfil();
 
     this.usuario.perfil().subscribe({
-      next:(user) => {
+      next: (user) => {
         this.perfilUser = user;
-        if(user.imagemPerfil){
+        this.populaForm(this.perfilUser);
+        if (user.imagemPerfil) {
           this.perfilUser.imagemPerfil = this.convertBase64ToBlob(user.imagemPerfil);
-          this.imagemPreview = this.perfilUser.imagemPerfil;
         }
         this.loading = false;
       },
-      error:(error) => {
+      error: (error) => {
         console.error(error)
         this.loading = false;
         this.snackService.showMessage(error.message, true);
@@ -51,9 +57,50 @@ export class UsuarioComponent implements OnInit{
 
   }
 
+  populaForm(perfil: PerfilUsuario) {
+    this.perfilForm.get('nome')?.setValue(perfil.nome);
+    this.perfilForm.get('email')?.setValue(perfil.email);
+  }
 
-  enableEditing() {
+  habilitarEdicao(desabilita?: boolean): void {
     this.isEditing = true;
+    if(desabilita){
+      this.isEditing = !desabilita;
+    }
+    if (this.isEditing) {
+      this.titulo = "Editar perfil"
+      this.perfilForm.get('nome')?.enable();
+      this.perfilForm.get('email')?.enable();
+    } else {
+      this.titulo = "Perfil";
+      this.perfilForm.get('nome')?.disable();
+      this.perfilForm.get('email')?.disable();
+    }
+  }
+
+  salvar() {
+    this.habilitarEdicao(true);
+    this.perfilUser.nome = this.perfilForm.get('nome')?.value;
+    this.perfilUser.email = this.perfilForm.get('email')?.value;
+
+    console.log(this.perfilUser)
+    if(this.imagem){
+      this.usuario.editarPerfil(this.perfilUser, this.imagem).subscribe({
+        next:(response:ResponseMensage) => {
+            this.snackService.showMessage(response.message)
+        },
+        error:(erro)=>console.error(erro)
+      });
+    } else {
+      this.usuario.editarPerfil(this.perfilUser).subscribe({
+        next:(response:ResponseMensage) => {
+            this.snackService.showMessage(response.message)
+        },
+        error:(erro)=>console.error(erro)
+      });
+    }
+
+
   }
 
   convertBase64ToBlob(base64: string) {
@@ -64,14 +111,20 @@ export class UsuarioComponent implements OnInit{
     }
     const byteArray = new Uint8Array(byteNumbers);
     const blob = new Blob([byteArray], { type: 'image/jpeg' }); // Defina o tipo de imagem apropriado aqui
-    console.log(URL.createObjectURL(blob))
     return URL.createObjectURL(blob);
   }
 
-  onFileChange(event: any) {
-    this.perfilUser.imagemPerfil = event.target.files[0];
-  }
-  habilitarEdicao(){
+  onFileChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (target.files && target.files.length > 0) {
+      this.imagem = target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.perfilUser.imagemPerfil = reader.result as string;
+      }
+      reader.readAsDataURL(this.imagem);
+    }
 
   }
+
 }
