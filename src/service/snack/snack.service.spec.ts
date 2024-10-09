@@ -1,12 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
 import { SnackService } from './snack.service';
+import { SharedModule } from 'src/app/shared/material/shared.module';
 
 describe('SnackService', () => {
   let service: SnackService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports:[SharedModule]
+    });
     service = TestBed.inject(SnackService);
   });
 

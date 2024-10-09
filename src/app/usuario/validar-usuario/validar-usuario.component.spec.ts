@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ValidarUsuarioComponent } from './validar-usuario.component';
+import { UsuarioModule } from '../usuario.module';
 
 describe('ValidarUsuarioComponent', () => {
   let component: ValidarUsuarioComponent;
@@ -8,7 +9,8 @@ describe('ValidarUsuarioComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ValidarUsuarioComponent ]
+      declarations: [ ValidarUsuarioComponent ],
+      imports:[UsuarioModule]
     })
     .compileComponents();
 
