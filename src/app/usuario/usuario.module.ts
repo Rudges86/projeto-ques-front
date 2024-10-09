@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
 import { SharedModule } from '../shared/material/shared.module';
 import { UsuarioComponent } from './perfil/usuario.component';
+import { ValidarUsuarioComponent } from './validar-usuario/validar-usuario.component';
 
 
 
@@ -16,7 +17,7 @@ import { UsuarioComponent } from './perfil/usuario.component';
     UsuarioComponent,
     LoginComponent,
     CadastroComponent,
-
+    ValidarUsuarioComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +28,10 @@ import { UsuarioComponent } from './perfil/usuario.component';
     FormsModule
   ],
   exports: [
-    UsuarioComponent
+    UsuarioComponent,
+    LoginComponent,
+    CadastroComponent,
+    ValidarUsuarioComponent
   ]
 })
 export class UsuarioModule { }
