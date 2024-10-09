@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ValidarUsuarioService } from '../../service/verificarUsuario/validar-usuario.service';
+
 import { ActivatedRoute } from '@angular/router';
+import { ValidarUsuarioService } from 'src/service/verificarUsuario/validar-usuario.service';
 
 @Component({
   selector: 'app-validar-usuario',
