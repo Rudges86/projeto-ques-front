@@ -9,7 +9,6 @@ import { UserLogin } from 'src/model/usuario/UserLogin';
 })
 export class AuthService {
   private baseUrl: string = 'http://localhost:8080/api/'
-  private token: string = "";
   constructor(private http: HttpClient, private router: Router) { }
 
 
@@ -25,7 +24,6 @@ export class AuthService {
   }
 
   isAutentacted(): boolean {
-    debugger
     return !!sessionStorage.getItem('token');
   }
 
