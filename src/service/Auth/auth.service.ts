@@ -29,7 +29,6 @@ export class AuthService {
 
   getRole(): string | null {
     const token = sessionStorage.getItem('token');
-    debugger
     if (token) {
       const payload = JSON.parse(atob(token.split('.')[1]))
       return payload.role

@@ -25,7 +25,6 @@ export class UsuarioService {
   }
 
   editarPerfil(perfil:PerfilUsuario, imagem?:File):Observable<ResponseMensage> {
-    debugger
     const formData = new FormData();
     if(imagem){
       formData.append('imagem',imagem);

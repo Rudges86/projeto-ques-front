@@ -8,6 +8,7 @@ import { CadastrarQuestoesComponent } from './questoes/cadastrar-questoes/cadast
 import { AuthGuard } from './auth.guard';
 import { NaoAutorizadoComponent } from './handles/nao-autorizado/nao-autorizado.component';
 import { NaoEncontradoComponent } from './handles/nao-encontrado/nao-encontrado.component';
+import { QuestoesComponent } from './questoes/questoes/questoes.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:"validar/:id", component:ValidarUsuarioComponent},
   {path:"perfil",component:UsuarioComponent,canActivate: [AuthGuard], data: { perfil: ['ADMIN','CLIENTE'] }},
   {path:"cadastrarQuestoes",component:CadastrarQuestoesComponent,canActivate: [AuthGuard], data: { perfil: ['ADMIN'] }},
+  {path:"questoes",component:QuestoesComponent},
   {path:"naoAutorizado", component:NaoAutorizadoComponent},
   {path:"**", component:NaoEncontradoComponent}
 
