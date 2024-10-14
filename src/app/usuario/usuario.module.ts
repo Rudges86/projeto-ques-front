@@ -9,6 +9,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { SharedModule } from '../shared/material/shared.module';
 import { UsuarioComponent } from './perfil/usuario.component';
 import { ValidarUsuarioComponent } from './validar-usuario/validar-usuario.component';
+import { RecuperarComponent } from './recuperar/recuperar.component';
 
 
 
@@ -17,7 +18,8 @@ import { ValidarUsuarioComponent } from './validar-usuario/validar-usuario.compo
     UsuarioComponent,
     LoginComponent,
     CadastroComponent,
-    ValidarUsuarioComponent
+    ValidarUsuarioComponent,
+    RecuperarComponent
   ],
   imports: [
     CommonModule,

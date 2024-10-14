@@ -1,14 +1,19 @@
 <p>questoes works!</p>
-<div>
-  <div *ngFor="let questao of questoes.content; let quest = index">
-    <p>{{quest + 1}} - {{questao.id}} - disciplina: {{questao.disciplina.nome}} - Banca: {{questao.banca.nome}}</p>
-    <p *ngIf="questao.texto">{{questao.texto}}</p>
-    <p>{{questao.pergunta}}</p>
-    <ol type="a">
-      <li *ngFor="let alternativa of questao.alternativas">
-        <input type="radio" name="alternativa" [value]="alternativa" [(ngModel)]="alternativaSelecionada.resposta">{{alternativa}}</li>
-    </ol>
+<mat-card style="width: 90%; margin-left: 25px;">
+  <mat-card-content *ngFor="let questao of questoes.content; let quest = index">
+      <p>{{quest + 1}} - {{questao.id}} - disciplina: {{questao.disciplina.nome}} - Banca: {{questao.banca.nome}}</p>
+      <p *ngIf="questao.texto">{{questao.texto}}</p>
+      <p>{{questao.pergunta}}</p>
+      <ol type="a">
+        <li *ngFor="let alternativa of questao.alternativas">
+          <input type="radio" name="alternativa" [value]="alternativa" [(ngModel)]="alternativaSelecionada.resposta">{{alternativa}}</li>
+      </ol>
 
-    <button type="button" (click)="resposta(questao.id)"> Responder </button>
-  </div>
-</div>
+      <button type="button" (click)="resposta(questao.id)"> Responder </button>
+  </mat-card-content>
+</mat-card>
+
+<button (click)="mostrar()">mostrar</button>
+
+
+

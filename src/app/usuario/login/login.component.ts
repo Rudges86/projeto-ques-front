@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { jwtDecode } from 'jwt-decode';
+import { ResponseMensage } from 'src/model/responseMensage';
 import { UserLogin } from 'src/model/usuario/UserLogin';
 import { AuthService } from 'src/service/Auth/auth.service';
 import { SnackService } from 'src/service/snack/snack.service';
@@ -36,21 +36,9 @@ export class LoginComponent {
         sessionStorage.setItem("token", token);
         this.router.navigate(['/perfil']);
       },
-      error: (erro => {
+      error: (erro) => {
         this.snackService.showMessage(erro.message);
-        console.error(erro)
-      })
-    });
+      }
+    })
   }
-
-  mostrar() {
-    const token = sessionStorage.getItem("token");
-    if (token) {
-      const decode = jwtDecode(token);
-      console.log(decode)
-    }
-
-
-  }
-
 }

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, catchError, map } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
+import { ErrorMessage } from 'src/model/responseMensage';
 import { UserLogin } from 'src/model/usuario/UserLogin';
 
 @Injectable({
@@ -13,9 +14,17 @@ export class AuthService {
 
 
   logarUsuario(user: UserLogin): Observable<string> {
-    return this.http.post<{ token: string }>(`${this.baseUrl}auth/login`, user).pipe(
-      map(response => response.token)
-    );
+     return this.http.post<{ token: string }>(`${this.baseUrl}auth/login`, user).pipe(
+      map(response => response.token),
+      catchError((erro:ErrorMessage) => {
+        let erroMessage = "Erro desconhecido";
+          if(erro.error) {
+            erroMessage = erro.error.message;
+
+          }
+          return throwError(()=> new Error(erroMessage));
+      })
+     );
   }
 
   logout(): void {
