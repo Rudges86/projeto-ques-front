@@ -1,0 +1,41 @@
+.bodyCadastroQuestoes {
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+}
+
+.banca-check {
+  border: 1px solid black;
+  width: 130px;
+  cursor: pointer;
+
+  .texto-seta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+  }
+  .lista {
+    position: absolute;
+    max-width: 250px;
+    max-height: 250px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+    .filtro {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+
+      input[type="text"] {
+        width: 80%;
+        margin-right: 5px;
+        border-radius: 2px;
+      }
+
+    }
+
+
+  }
+}

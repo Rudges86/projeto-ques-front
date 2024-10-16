@@ -56,7 +56,7 @@ export class AuthService {
     return this.http.get(`${this.baseUrl}auth/valida-token`, { headers: { 'Authorization': 'Bearer ' + token } }).pipe(
       map(() => true),
       catchError(() => {
-        this.logout(); // Logout se o token não for válido
+        this.logout();
         return [false];
       }));
   }

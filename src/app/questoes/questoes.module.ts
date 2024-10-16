@@ -6,13 +6,15 @@ import { CadastrarQuestoesComponent } from './cadastrar-questoes/cadastrar-quest
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
+import { ModalCadastroQuestoesComponent } from './modal-cadastro-questoes/modal-cadastro-questoes.component';
 
 
 
 @NgModule({
   declarations: [
     QuestoesComponent,
-    CadastrarQuestoesComponent
+    CadastrarQuestoesComponent,
+    ModalCadastroQuestoesComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Cadastro</h2>
+<mat-dialog-content>
+  <form>
+      <label>Nome da banca</label>
+      <input  [(ngModel)]="banca" name="banca" required>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button (click)="cadastrar()">Cadastrar</button>
+</mat-dialog-actions>

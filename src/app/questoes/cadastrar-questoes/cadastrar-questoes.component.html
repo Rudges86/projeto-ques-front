@@ -1,11 +1,32 @@
 <p>cadastrar-questoes works!</p>
+<div class="bodyCadastroQuestoes">
+  <label>Pergunta</label>
+  <input type="text" placeholder="Pergunta?">
+  <label>alo</label>
+  <input list="banca" [(ngModel)]="valor">
+  <datalist id="banca">
+    <option *ngFor="let banca of lista" [value]="banca"></option>
+  </datalist>
+  <button (click)="openDialog()">Abrir Modal de Cadastro</button>
 
-<label>Pergunta</label>
-<input type="text" placeholder="Pergunta?">
-<label>Banca</label>
-<select id="banca">
-  <option>Selecione uma opção</option>
-  <option>Bancas</option>
-</select>
+  <button (click)="teste()">test</button>
 
+  <div class="banca-check" (click)="habilitaLista()">
+    <div class="texto-seta">
+      <span>Banca {{textoSelecionado}} </span>
+      <i class="fas fa-chevron-down seta"></i>
+    </div>
+    <div class="lista" *ngIf="isClick">
+      <div class="filtro">
+        <input type="text" (keyup)="filtroBanca()" [(ngModel)]="valor" (click)="$event.stopPropagation()">
+        <i class="fas fa-search"></i>
+      </div>
+      <span *ngIf="filtro.length == 0">Nenhuma banca encontrada</span>
+      <span *ngFor="let banca of filtro">
+        <input type="checkbox" name="banca" id="banca" [checked]="banca.selecionada" (click)="$event.stopPropagation()"
+          [value]="banca.nome" (change)="seleciona(banca)">{{banca.nome}}
+      </span>
+    </div>
+  </div>
 
+</div>

@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators }
 import { Router } from '@angular/router';
 import { UsuarioService } from './../../../service/usuario/usuario.service';
 import { SnackService } from 'src/service/snack/snack.service';
+import { ErrorMessage } from 'src/model/responseMensage';
 
 
 
@@ -65,7 +66,7 @@ export class CadastroComponent implements OnDestroy {
           this.route.navigate(['/login'])
         }, 16000)
       },
-      error: (erro) => this.snack.showMessage(erro.error.message, true)
+      error: (erro) => this.snack.showMessage(erro.message, true)
     });
   }
 
